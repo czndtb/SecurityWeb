@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.web.user.dao.WlSysOperatorMapper">
+	<resultMap id="BaseResultMap"
+		type="com.wl.web.user.model.WlSysOperator">
+		<id column="operator_id" jdbcType="INTEGER" property="operatorId" />
+		<result column="emp_id" jdbcType="INTEGER" property="empId" />
+		<result column="operator_code" jdbcType="VARCHAR"
+			property="operatorCode" />
+		<result column="parent_operator_code" jdbcType="VARCHAR"
+			property="parentOperatorCode" />
+		<result column="operator_name" jdbcType="VARCHAR"
+			property="operatorName" />
+		<result column="operator_type" jdbcType="TINYINT"
+			property="operatorType" />
+		<result column="city_id" jdbcType="INTEGER" property="cityId" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="contactor" jdbcType="VARCHAR"
+			property="contactor" />
+		<result column="postcode" jdbcType="VARCHAR"
+			property="postcode" />
+		<result column="contact_phone_area" jdbcType="VARCHAR"
+			property="contactPhoneArea" />
+		<result column="contact_phone" jdbcType="VARCHAR"
+			property="contactPhone" />
+		<result column="contact_fax" jdbcType="VARCHAR"
+			property="contactFax" />
+		<result column="contact_email" jdbcType="VARCHAR"
+			property="contactEmail" />
+		<result column="description" jdbcType="VARCHAR"
+			property="description" />
+		<result column="state" jdbcType="TINYINT" property="state" />
+		<result column="create_time" jdbcType="TIMESTAMP"
+			property="createTime" />
+		<result column="update_time" jdbcType="TIMESTAMP"
+			property="updateTime" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		operator_id, emp_id, operator_code, parent_operator_code,
+		operator_name,
+		operator_type,
+		city_id, address, contactor, postcode,
+		contact_phone_area, contact_phone,
+		contact_fax,
+		contact_email,
+		description, state, create_time, update_time
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from wl_sys_operator
+		where operator_id = #{operatorId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from wl_sys_operator
+		where operator_id =
+		#{operatorId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert"
+		parameterType="com.wl.web.user.model.WlSysOperator">
+		insert into wl_sys_operator (operator_id, emp_id,
+		operator_code,
+		parent_operator_code, operator_name, operator_type,
+		city_id, address, contactor,
+		postcode, contact_phone_area,
+		contact_phone,
+		contact_fax, contact_email, description,
+		state,
+		create_time, update_time
+		)
+		values (#{operatorId,jdbcType=INTEGER},
+		#{empId,jdbcType=INTEGER},
+		#{operatorCode,jdbcType=VARCHAR},
+		#{parentOperatorCode,jdbcType=VARCHAR},
+		#{operatorName,jdbcType=VARCHAR}, #{operatorType,jdbcType=TINYINT},
+		#{cityId,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR},
+		#{contactor,jdbcType=VARCHAR},
+		#{postcode,jdbcType=VARCHAR},
+		#{contactPhoneArea,jdbcType=VARCHAR},
+		#{contactPhone,jdbcType=VARCHAR},
+		#{contactFax,jdbcType=VARCHAR},
+		#{contactEmail,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+		#{state,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.wl.web.user.model.WlSysOperator">
+		insert into wl_sys_operator
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="operatorId != null">
+				operator_id,
+			</if>
+			<if test="empId != null">
+				emp_id,
+			</if>
+			<if test="operatorCode != null">
+				operator_code,
+			</if>
+			<if test="parentOperatorCode != null">
+				parent_operator_code,
+			</if>
+			<if test="operatorName != null">
+				operator_name,
+			</if>
+			<if test="operatorType != null">
+				operator_type,
+			</if>
+			<if test="cityId != null">
+				city_id,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="contactor != null">
+				contactor,
+			</if>
+			<if test="postcode != null">
+				postcode,
+			</if>
+			<if test="contactPhoneArea != null">
+				contact_phone_area,
+			</if>
+			<if test="contactPhone != null">
+				contact_phone,
+			</if>
+			<if test="contactFax != null">
+				contact_fax,
+			</if>
+			<if test="contactEmail != null">
+				contact_email,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="state != null">
+				state,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="operatorId != null">
+				#{operatorId,jdbcType=INTEGER},
+			</if>
+			<if test="empId != null">
+				#{empId,jdbcType=INTEGER},
+			</if>
+			<if test="operatorCode != null">
+				#{operatorCode,jdbcType=VARCHAR},
+			</if>
+			<if test="parentOperatorCode != null">
+				#{parentOperatorCode,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorName != null">
+				#{operatorName,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorType != null">
+				#{operatorType,jdbcType=TINYINT},
+			</if>
+			<if test="cityId != null">
+				#{cityId,jdbcType=INTEGER},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="contactor != null">
+				#{contactor,jdbcType=VARCHAR},
+			</if>
+			<if test="postcode != null">
+				#{postcode,jdbcType=VARCHAR},
+			</if>
+			<if test="contactPhoneArea != null">
+				#{contactPhoneArea,jdbcType=VARCHAR},
+			</if>
+			<if test="contactPhone != null">
+				#{contactPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="contactFax != null">
+				#{contactFax,jdbcType=VARCHAR},
+			</if>
+			<if test="contactEmail != null">
+				#{contactEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=TINYINT},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.wl.web.user.model.WlSysOperator">
+		update wl_sys_operator
+		<set>
+			<if test="empId != null">
+				emp_id = #{empId,jdbcType=INTEGER},
+			</if>
+			<if test="operatorCode != null">
+				operator_code = #{operatorCode,jdbcType=VARCHAR},
+			</if>
+			<if test="parentOperatorCode != null">
+				parent_operator_code =
+				#{parentOperatorCode,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorName != null">
+				operator_name = #{operatorName,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorType != null">
+				operator_type = #{operatorType,jdbcType=TINYINT},
+			</if>
+			<if test="cityId != null">
+				city_id = #{cityId,jdbcType=INTEGER},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="contactor != null">
+				contactor = #{contactor,jdbcType=VARCHAR},
+			</if>
+			<if test="postcode != null">
+				postcode = #{postcode,jdbcType=VARCHAR},
+			</if>
+			<if test="contactPhoneArea != null">
+				contact_phone_area =
+				#{contactPhoneArea,jdbcType=VARCHAR},
+			</if>
+			<if test="contactPhone != null">
+				contact_phone = #{contactPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="contactFax != null">
+				contact_fax = #{contactFax,jdbcType=VARCHAR},
+			</if>
+			<if test="contactEmail != null">
+				contact_email = #{contactEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				state = #{state,jdbcType=TINYINT},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where operator_id = #{operatorId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.wl.web.user.model.WlSysOperator">
+		update wl_sys_operator
+		set emp_id =
+		#{empId,jdbcType=INTEGER},
+		operator_code =
+		#{operatorCode,jdbcType=VARCHAR},
+		parent_operator_code =
+		#{parentOperatorCode,jdbcType=VARCHAR},
+		operator_name =
+		#{operatorName,jdbcType=VARCHAR},
+		operator_type =
+		#{operatorType,jdbcType=TINYINT},
+		city_id = #{cityId,jdbcType=INTEGER},
+		address = #{address,jdbcType=VARCHAR},
+		contactor =
+		#{contactor,jdbcType=VARCHAR},
+		postcode = #{postcode,jdbcType=VARCHAR},
+		contact_phone_area = #{contactPhoneArea,jdbcType=VARCHAR},
+		contact_phone = #{contactPhone,jdbcType=VARCHAR},
+		contact_fax =
+		#{contactFax,jdbcType=VARCHAR},
+		contact_email =
+		#{contactEmail,jdbcType=VARCHAR},
+		description =
+		#{description,jdbcType=VARCHAR},
+		state = #{state,jdbcType=TINYINT},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_time =
+		#{updateTime,jdbcType=TIMESTAMP}
+		where operator_id =
+		#{operatorId,jdbcType=INTEGER}
+	</update>
+	<!-- 获取用户机构 -->
+	<select id="getOperatorsByEmpId" resultMap="BaseResultMap">
+		select
+		*
+		from
+		`wl_sys_employee_operator` t
+		left join `wl_sys_operator` o
+		on t.`operator_code` = o.`operator_code`
+		where t.`user_id` = #{empId}
+	</select>
+</mapper>

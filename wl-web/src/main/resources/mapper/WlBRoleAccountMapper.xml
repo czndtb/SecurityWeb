@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.web.user.dao.WlBRoleAccountMapper">
+  <resultMap id="BaseResultMap" type="com.wl.web.user.model.WlBRoleAccount">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="role_id" jdbcType="BIGINT" property="roleId" />
+    <association property="users" javaType="com.wl.web.user.model.User">
+    	<id column="id" jdbcType="BIGINT" property="id" />
+	    <result column="username" jdbcType="VARCHAR" property="username" />
+	    <result column="password" jdbcType="VARCHAR" property="password" />
+	    <result column="phone" jdbcType="VARCHAR" property="phone" />
+	    <result column="email" jdbcType="VARCHAR" property="email" />
+	    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+	    <result column="language" jdbcType="VARCHAR" property="language" />
+	    <result column="state" jdbcType="INTEGER" property="state" />
+	    <result column="operator_code" jdbcType="VARCHAR" property="operatorCode" />
+	    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+	    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </association>
+    <association property="roles" javaType="com.wl.web.user.model.WlBRole">
+        <id column="id" jdbcType="INTEGER" property="id" />
+	    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+	    <result column="role_comment" jdbcType="VARCHAR" property="roleComment" />
+	    <result column="operator_code" jdbcType="VARCHAR" property="operatorCode" />
+    </association>
+    <collection property="urls" ofType="com.wl.web.user.model.WlBRoleUrl">
+	    <id column="url_id" jdbcType="BIGINT" property="id" />
+		<result column="role_id" jdbcType="BIGINT" property="roleId" />
+		<result column="url" jdbcType="VARCHAR" property="url" />
+	</collection>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, role_id
+  </sql>
+  <sql id="userRoleColumn">
+  	ur.id, ur.user_id, ur.role_id
+  </sql>
+  <sql id="userColumn">
+  	u.id, u.username, u.password, u.phone, u.email, u.language, u.avatar,u.state, u.operator_code, u.create_time, 
+    u.update_time
+  </sql>
+  <sql id="roleColumn">
+  	r.id, r.role_name, r.role_comment, r.operator_code
+  </sql>
+  <sql id="urlColumn">
+  	ru.id url_id, ru.role_id, ru.url
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wl_b_role_account
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from wl_b_role_account
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.wl.web.user.model.WlBRoleAccount">
+    insert into wl_b_role_account (id, user_id, role_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.web.user.model.WlBRoleAccount">
+    insert into wl_b_role_account
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.web.user.model.WlBRoleAccount">
+    update wl_b_role_account
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.web.user.model.WlBRoleAccount">
+    update wl_b_role_account
+    set user_id = #{userId,jdbcType=BIGINT},
+      role_id = #{roleId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="selectUserWithRoles" resultMap="BaseResultMap">
+	select
+	<include refid="userRoleColumn" />,
+	<include refid="userColumn" />,
+	<include refid="roleColumn" />,
+	<include refid="urlColumn" />
+	from wl_b_role_account ur
+	LEFT JOIN wl_b_account u on u.id = ur.user_id
+	LEFT JOIN wl_b_role r on r.id = ur.role_id
+	LEFT JOIN wl_b_role_url ru on ru.role_id = r.id
+	where u.username = #{username}
+  </select>
+</mapper>

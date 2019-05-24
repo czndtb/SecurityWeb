@@ -1,0 +1,40 @@
+jwt:
+  expiration: 2592000
+  header: Authorization
+  route:
+    authentication:
+      path: /auth
+      refresh: /refresh
+  secret: ABCDEFGJJ30CM
+logging:
+  config: classpath:logback-spring.xml
+
+server:
+  port: 9711
+  servlet:
+    context-path: /web
+
+spring:
+  datasource:
+    password: Af69372t
+    url: jdbc:mysql://10.94.44.77:3306/wl_fms_test?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull
+    username: root2
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  http:
+    converters:
+      preferred-json-mapper: fastjson
+  redis:
+    cluster:
+      nodes:  10.94.44.100:6379
+  profiles:
+    active: dev
+    
+mybatis:
+  mapper-locations: classpath:**/mapper/*.xml
+  
+qiniu:  
+  ak: krxshYuX1ndoVngQVRXxyaTQoCQ4kiyuP9tnntpN
+  sk: YDsDNuG71bKJBt4AYlz6a2vASgN4KVFy-51627lc
+  domain: http://fms-manage.magicyo.com/
+  namespace:  fms-manage

@@ -1,0 +1,6 @@
+server:
+  port: 36147
+  
+spring:
+  datasource:
+    url: jdbc:mysql://10.94.44.77:3306/wl_base?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull

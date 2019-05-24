@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.web.common.dao.WlBCountriesMapper">
+  <resultMap id="BaseResultMap" type="com.wl.web.common.model.WlBCountries">
+    <id column="countries_id" jdbcType="INTEGER" property="countriesId" />
+    <result column="countries_name" jdbcType="VARCHAR" property="countriesName" />
+    <result column="countries_name2" jdbcType="VARCHAR" property="countriesName2" />
+    <result column="countries_name_en" jdbcType="VARCHAR" property="countriesNameEn" />
+    <result column="countires_letter" jdbcType="CHAR" property="countiresLetter" />
+    <result column="countries_img_path" jdbcType="VARCHAR" property="countriesImgPath" />
+    <result column="tel_code" jdbcType="VARCHAR" property="telCode" />
+    <result column="phone_num" jdbcType="INTEGER" property="phoneNum" />
+    <result column="phone_js" jdbcType="VARCHAR" property="phoneJs" />
+    <result column="phone_template" jdbcType="VARCHAR" property="phoneTemplate" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="log_time" jdbcType="TIMESTAMP" property="logTime" />
+    <result column="countries_abbreviation" jdbcType="VARCHAR" property="countriesAbbreviation" />
+    <result column="is_show" jdbcType="INTEGER" property="isShow" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    countries_id, countries_name, countries_name2, countries_name_en, countires_letter, 
+    countries_img_path, tel_code, phone_num, phone_js, phone_template, sort, remark, 
+    log_time, countries_abbreviation, is_show
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wl_b_countries
+    where countries_id = #{countriesId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from wl_b_countries
+    where countries_id = #{countriesId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wl.web.common.model.WlBCountries">
+    insert into wl_b_countries (countries_id, countries_name, countries_name2, 
+      countries_name_en, countires_letter, countries_img_path, 
+      tel_code, phone_num, phone_js, 
+      phone_template, sort, remark, 
+      log_time, countries_abbreviation, is_show
+      )
+    values (#{countriesId,jdbcType=INTEGER}, #{countriesName,jdbcType=VARCHAR}, #{countriesName2,jdbcType=VARCHAR}, 
+      #{countriesNameEn,jdbcType=VARCHAR}, #{countiresLetter,jdbcType=CHAR}, #{countriesImgPath,jdbcType=VARCHAR}, 
+      #{telCode,jdbcType=VARCHAR}, #{phoneNum,jdbcType=INTEGER}, #{phoneJs,jdbcType=VARCHAR}, 
+      #{phoneTemplate,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{logTime,jdbcType=TIMESTAMP}, #{countriesAbbreviation,jdbcType=VARCHAR}, #{isShow,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.web.common.model.WlBCountries">
+    insert into wl_b_countries
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="countriesId != null">
+        countries_id,
+      </if>
+      <if test="countriesName != null">
+        countries_name,
+      </if>
+      <if test="countriesName2 != null">
+        countries_name2,
+      </if>
+      <if test="countriesNameEn != null">
+        countries_name_en,
+      </if>
+      <if test="countiresLetter != null">
+        countires_letter,
+      </if>
+      <if test="countriesImgPath != null">
+        countries_img_path,
+      </if>
+      <if test="telCode != null">
+        tel_code,
+      </if>
+      <if test="phoneNum != null">
+        phone_num,
+      </if>
+      <if test="phoneJs != null">
+        phone_js,
+      </if>
+      <if test="phoneTemplate != null">
+        phone_template,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="logTime != null">
+        log_time,
+      </if>
+      <if test="countriesAbbreviation != null">
+        countries_abbreviation,
+      </if>
+      <if test="isShow != null">
+        is_show,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="countriesId != null">
+        #{countriesId,jdbcType=INTEGER},
+      </if>
+      <if test="countriesName != null">
+        #{countriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="countriesName2 != null">
+        #{countriesName2,jdbcType=VARCHAR},
+      </if>
+      <if test="countriesNameEn != null">
+        #{countriesNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="countiresLetter != null">
+        #{countiresLetter,jdbcType=CHAR},
+      </if>
+      <if test="countriesImgPath != null">
+        #{countriesImgPath,jdbcType=VARCHAR},
+      </if>
+      <if test="telCode != null">
+        #{telCode,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNum != null">
+        #{phoneNum,jdbcType=INTEGER},
+      </if>
+      <if test="phoneJs != null">
+        #{phoneJs,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneTemplate != null">
+        #{phoneTemplate,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="logTime != null">
+        #{logTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="countriesAbbreviation != null">
+        #{countriesAbbreviation,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null">
+        #{isShow,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.web.common.model.WlBCountries">
+    update wl_b_countries
+    <set>
+      <if test="countriesName != null">
+        countries_name = #{countriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="countriesName2 != null">
+        countries_name2 = #{countriesName2,jdbcType=VARCHAR},
+      </if>
+      <if test="countriesNameEn != null">
+        countries_name_en = #{countriesNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="countiresLetter != null">
+        countires_letter = #{countiresLetter,jdbcType=CHAR},
+      </if>
+      <if test="countriesImgPath != null">
+        countries_img_path = #{countriesImgPath,jdbcType=VARCHAR},
+      </if>
+      <if test="telCode != null">
+        tel_code = #{telCode,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNum != null">
+        phone_num = #{phoneNum,jdbcType=INTEGER},
+      </if>
+      <if test="phoneJs != null">
+        phone_js = #{phoneJs,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneTemplate != null">
+        phone_template = #{phoneTemplate,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="logTime != null">
+        log_time = #{logTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="countriesAbbreviation != null">
+        countries_abbreviation = #{countriesAbbreviation,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null">
+        is_show = #{isShow,jdbcType=INTEGER},
+      </if>
+    </set>
+    where countries_id = #{countriesId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.web.common.model.WlBCountries">
+    update wl_b_countries
+    set countries_name = #{countriesName,jdbcType=VARCHAR},
+      countries_name2 = #{countriesName2,jdbcType=VARCHAR},
+      countries_name_en = #{countriesNameEn,jdbcType=VARCHAR},
+      countires_letter = #{countiresLetter,jdbcType=CHAR},
+      countries_img_path = #{countriesImgPath,jdbcType=VARCHAR},
+      tel_code = #{telCode,jdbcType=VARCHAR},
+      phone_num = #{phoneNum,jdbcType=INTEGER},
+      phone_js = #{phoneJs,jdbcType=VARCHAR},
+      phone_template = #{phoneTemplate,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      log_time = #{logTime,jdbcType=TIMESTAMP},
+      countries_abbreviation = #{countriesAbbreviation,jdbcType=VARCHAR},
+      is_show = #{isShow,jdbcType=INTEGER}
+    where countries_id = #{countriesId,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wl_b_countries
+    where
+    	is_show = 1
+    order by sort asc
+  </select>
+</mapper>
