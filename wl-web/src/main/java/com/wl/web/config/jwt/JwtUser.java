@@ -30,7 +30,7 @@ public class JwtUser implements UserDetails {
 	private String operatorCode;
 	private Date createTime;
 	private Date updateTime;
-	private List<GrantedAuthority> authorities;
+	private Collection<? extends GrantedAuthority> authorities;
 	
 	@JsonIgnore
 	@Override

@@ -1,5 +1,6 @@
 package com.wl.web.user.model;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +21,6 @@ public class User {
 	private String operatorCode;
 	private Date createTime;
 	private Date updateTime;
-	private String[] roles = { "super_admin", "admin" };// 默认写admin 具体路由信息通过更改路由表控制
-	private List<GrantedAuthority> authorities;
+	private List<String> access;// 具体路由信息通过更改路由表控制
+	private Collection<? extends GrantedAuthority> authorities;
 }

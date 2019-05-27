@@ -2,12 +2,16 @@ package com.wl.web.aop;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.wl.fms.common.entity.ErrorCode;
 import com.wl.fms.common.entity.RestResult;
@@ -25,8 +29,11 @@ public class ParamValidAspect {
         if (bindingResult.hasErrors()) {
 	        String errorInfo = getErrorsSplitNewLine(bindingResult);
 	        log.info("AOP-ParamValidAspect-validateParam进行参数校验出错, 出错信息如下：{}", errorInfo);
-      
+	        
             retVal = RestResult.error(ErrorCode.ERROR_PARAMS_ERROR.getCode(),errorInfo);
+            
+    		HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
+    		response.setStatus(HttpServletResponse.SC_BAD_REQUEST);//参数错误 400
         } else {
         //执行目标方法
             retVal = pjp.proceed();

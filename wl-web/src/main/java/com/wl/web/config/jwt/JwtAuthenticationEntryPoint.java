@@ -31,7 +31,8 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Se
 //    	response.getWriter().println(JSONObject.toJSONString(RestResult.error(ErrorCode.ERROR_TOKEN_ERROR)));
     	
     	response.setContentType("application/json");
-    	response.setHeader("Content-type", "application/json;charset=UTF-8");  
+    	response.setHeader("Content-type", "application/json;charset=UTF-8");
+    	response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);//未授权401
         OutputStream ps = response.getOutputStream();  
         //这句话的意思，使得放入流的数据是utf8格式  
         ps.write(JSONObject.toJSONString(RestResult.error(ErrorCode.ERROR_TOKEN_ERROR)).getBytes("UTF-8"));
