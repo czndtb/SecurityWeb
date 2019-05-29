@@ -29,6 +29,11 @@
 		<result column="role_id" jdbcType="BIGINT" property="roleId" />
 		<result column="url" jdbcType="VARCHAR" property="url" />
 	</collection>
+	<collection property="accesses" ofType="com.wl.web.user.model.WlBAccess">
+	    <id column="access_id" jdbcType="BIGINT" property="id" />
+	    <result column="user_id" jdbcType="BIGINT" property="userId" />
+	    <result column="access_url" jdbcType="VARCHAR" property="url" />
+	</collection>
   </resultMap>
   <sql id="Base_Column_List">
     id, user_id, role_id
@@ -45,6 +50,9 @@
   </sql>
   <sql id="urlColumn">
   	ru.id url_id, ru.role_id, ru.url
+  </sql>
+  <sql id="accessColumn">
+  	ac.id access_id,ac.user_id,ac.url access_url
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -111,11 +119,13 @@
 	<include refid="userRoleColumn" />,
 	<include refid="userColumn" />,
 	<include refid="roleColumn" />,
-	<include refid="urlColumn" />
+	<include refid="urlColumn" />,
+	<include refid="accessColumn" />
 	from wl_b_role_account ur
 	LEFT JOIN wl_b_account u on u.id = ur.user_id
 	LEFT JOIN wl_b_role r on r.id = ur.role_id
 	LEFT JOIN wl_b_role_url ru on ru.role_id = r.id
+	LEFT JOIN wl_b_access ac on ur.user_id = ac.user_id
 	where u.username = #{username}
   </select>
 </mapper>

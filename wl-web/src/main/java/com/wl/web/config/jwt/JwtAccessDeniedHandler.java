@@ -26,8 +26,8 @@ public class JwtAccessDeniedHandler implements AccessDeniedHandler {
 		httpServletResponse.setContentType("application/json");
 		httpServletResponse.setHeader("Content-type", "application/json;charset=UTF-8");
 		httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);//未授权401
-        OutputStream ps = httpServletResponse.getOutputStream();  
-        //这句话的意思，使得放入流的数据是utf8格式  
+        OutputStream ps = httpServletResponse.getOutputStream();
+        //这句话的意思，使得放入流的数据是utf8格式 
         ps.write(JSONObject.toJSONString(RestResult.error(ErrorCode.ACCESS_DENIED)).getBytes("UTF-8"));
 		
 	}

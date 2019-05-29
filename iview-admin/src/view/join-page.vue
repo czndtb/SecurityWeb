@@ -18,26 +18,26 @@
 </template>
 
 <script>
-import qqFans from '@/assets/images/qq-group1.jpg'
-import qqFans2 from '@/assets/images/qq-group2.jpg'
+import qqFans from "@/assets/images/qq-group1.jpg";
+import qqFans2 from "@/assets/images/qq-group2.jpg";
 export default {
-  name: 'join_page',
-  data () {
+  name: "join_page",
+  data() {
     return {
       qqFans,
       qqFans2
-    }
+    };
   }
-}
+};
 </script>
 
 <style>
-.qq-group-img{
+.qq-group-img {
   display: block;
   margin: 0 auto;
   width: 240px;
 }
-.qq-group-intro{
+.qq-group-intro {
   padding: 20px;
   font-size: 16px;
 }

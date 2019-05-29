@@ -81,7 +81,7 @@ export const constantRouterMap = [
 
 export default [
   {
-    path: '',
+    path: '/doc',
     name: 'doc',
     meta: {
       title: '文档',
@@ -98,7 +98,7 @@ export default [
     },
     children: [
       {
-        path: 'join_page',
+        path: '/join_page',
         name: 'join_page',
         meta: {
           icon: '_qq',

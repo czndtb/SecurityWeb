@@ -21,6 +21,7 @@ public final class JwtUserFactory {
                 user.getOperatorCode(),
                 user.getCreateTime(),
                 user.getUpdateTime(),
+                user.getAccess(),
                 user.getAuthorities()
         );
     }

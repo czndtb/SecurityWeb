@@ -11,11 +11,28 @@
  Target Server Version : 50637
  File Encoding         : 65001
 
- Date: 27/05/2019 16:27:13
+ Date: 29/05/2019 09:35:34
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for wl_b_access
+-- ----------------------------
+DROP TABLE IF EXISTS `wl_b_access`;
+CREATE TABLE `wl_b_access`  (
+  `id` bigint(11) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(11) NULL DEFAULT NULL COMMENT '用户id',
+  `url` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '可访问的url',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户 web 菜单 权限' ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of wl_b_access
+-- ----------------------------
+INSERT INTO `wl_b_access` VALUES (1, 1, '/auth');
+INSERT INTO `wl_b_access` VALUES (2, 1, '/user');
 
 -- ----------------------------
 -- Table structure for wl_b_account
@@ -41,6 +58,24 @@ CREATE TABLE `wl_b_account`  (
 -- ----------------------------
 INSERT INTO `wl_b_account` VALUES (1, 'admin', '$2a$10$MQmm5HuZa80k.OjCzGvpVuOGEslm3lrOydM9BqSZizO8r7rVBTyrq', '13154726233', '13154726233@qq.com', 'http://fms-manage.magicyo.com/FmvB6YRXC5Wl20GLGkMYap9lAHSw', 'zh_CN', 1, 'C001', '2018-12-06 16:33:29', '2019-05-24 10:51:24');
 INSERT INTO `wl_b_account` VALUES (2, 'test', '$10$MQmm5HuZa80k.OjCzGvpVuOGEslm3lrOydM9BqSZizO8r7rVBTyrq', '15986868686', '15986868686@qq.com', 'manage.magicyo.com/FmvB6YRXC5Wl20GLGkMYap9lAHSw', 'zh_CN', 1, 'C001', '2019-05-24 13:38:26', '2019-05-24 13:38:53');
+
+-- ----------------------------
+-- Table structure for wl_b_menu
+-- ----------------------------
+DROP TABLE IF EXISTS `wl_b_menu`;
+CREATE TABLE `wl_b_menu`  (
+  `menu_id` bigint(11) NOT NULL COMMENT '菜单id',
+  `url` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '菜单路由url',
+  `parent_menu_id` bigint(11) NULL DEFAULT NULL COMMENT '上级菜单id',
+  PRIMARY KEY (`menu_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单总表\r\n仅包含 菜单路由url 由前端做国际化' ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of wl_b_menu
+-- ----------------------------
+INSERT INTO `wl_b_menu` VALUES (100, '/doc', NULL);
+INSERT INTO `wl_b_menu` VALUES (200, '/join', NULL);
+INSERT INTO `wl_b_menu` VALUES (201, '/join_page', 200);
 
 -- ----------------------------
 -- Table structure for wl_b_role
@@ -85,12 +120,13 @@ CREATE TABLE `wl_b_role_url`  (
   `role_id` bigint(20) NULL DEFAULT NULL,
   `url` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色资源权限表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户访问资源路径权限表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of wl_b_role_url
 -- ----------------------------
-INSERT INTO `wl_b_role_url` VALUES (1, 1, '/auth');
-INSERT INTO `wl_b_role_url` VALUES (2, 1, '/user/info');
+INSERT INTO `wl_b_role_url` VALUES (5, 1, '/join');
+INSERT INTO `wl_b_role_url` VALUES (6, 1, '/join_page');
+INSERT INTO `wl_b_role_url` VALUES (7, 1, '/doc');
 
 SET FOREIGN_KEY_CHECKS = 1;

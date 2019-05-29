@@ -14,6 +14,8 @@ public class WlBRoleAccount {
 	private WlBRole roles;
 	
 	private List<WlBRoleUrl> urls;
+	
+	private List<WlBAccess> accesses;
 
 	public Long getId() {
 		return id;
@@ -61,6 +63,14 @@ public class WlBRoleAccount {
 
 	public void setUrls(List<WlBRoleUrl> urls) {
 		this.urls = urls;
+	}
+
+	public List<WlBAccess> getAccesses() {
+		return accesses;
+	}
+
+	public void setAccesses(List<WlBAccess> accesses) {
+		this.accesses = accesses;
 	}
 
 }

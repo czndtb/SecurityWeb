@@ -22,5 +22,5 @@ public class User {
 	private Date createTime;
 	private Date updateTime;
 	private List<String> access;// 具体路由信息通过更改路由表控制
-	private Collection<? extends GrantedAuthority> authorities;
+	private Collection<? extends GrantedAuthority> authorities;//用户数据访问权限
 }

@@ -14,6 +14,7 @@ const router = new Router({
   mode: 'history'
   // mode: 'hash'
 })
+
 const LOGIN_PAGE_NAME = 'login'
 
 const turnTo = (to, access, next) => {
@@ -43,11 +44,18 @@ router.beforeEach((to, from, next) => {
     })
   } else {
     if (store.state.user.hasGetInfo) {
+      if (!store.state.user.hasLoadRoute) {
+        router.options.routes = constantRouterMap.concat(store.state.user.addRoutes)
+        router.addRoutes(store.state.user.addRoutes) // 动态添加可访问路由表
+        store.state.user.hasLoadRoute = true
+      }
       turnTo(to, store.state.user.access, next)
     } else {
       store.dispatch('getUserInfo').then(user => {
         // 拉取用户信息，通过用户权限和跳转的页面的name来判断是否有权限访问;access必须是一个数组，如：['super_admin'] ['super_admin', 'admin']
-        router.addRoutes(store.state.accessroute) // 动态添加可访问路由表
+        router.options.routes = constantRouterMap.concat(store.state.user.addRoutes)
+        router.addRoutes(store.state.user.addRoutes) // 动态添加可访问路由表
+        store.state.user.hasLoadRoute = true
         turnTo(to, user.access, next)
       }).catch(() => {
         setToken('')

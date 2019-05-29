@@ -36,10 +36,12 @@ public class DatabaseUserDetailsService implements UserDetailsService {
 		} else {
 
 			// 权限地址列表
-			List<GrantedAuthority> grantedAuthorities = account.getUrls().stream()
-					.map(url -> new SimpleGrantedAuthority(url.getUrl())).collect(Collectors.toList());
-			
-			account.getUsers().setAuthorities(grantedAuthorities);
+			List<String> menuUrl = account.getUrls().stream().map(url -> url.getUrl()).collect(Collectors.toList());
+			account.getUsers().setAccess(menuUrl);
+
+			List<GrantedAuthority> accesses = account.getAccesses().stream()
+					.map(access -> new SimpleGrantedAuthority(access.getUrl())).collect(Collectors.toList());
+			account.getUsers().setAuthorities(accesses);
 
 			return JwtUserFactory.create(account.getUsers());
 		}

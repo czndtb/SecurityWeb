@@ -30,6 +30,7 @@ public class JwtUser implements UserDetails {
 	private String operatorCode;
 	private Date createTime;
 	private Date updateTime;
+	private List<String> access;
 	private Collection<? extends GrantedAuthority> authorities;
 	
 	@JsonIgnore
@@ -153,6 +154,14 @@ public class JwtUser implements UserDetails {
 
 	public void setAuthorities(List<GrantedAuthority> authorities) {
 		this.authorities = authorities;
+	}
+
+	public List<String> getAccess() {
+		return access;
+	}
+
+	public void setAccess(List<String> access) {
+		this.access = access;
 	}
 
 }

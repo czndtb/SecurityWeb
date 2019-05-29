@@ -20,6 +20,7 @@ export default {
     token: getToken(),
     access: '',
     hasGetInfo: false,
+    hasLoadRoute: false,
     unreadCount: 0,
     messageUnreadList: [],
     messageReadedList: [],
@@ -48,6 +49,9 @@ export default {
       setToken(token)
     },
     setHasGetInfo(state, status) {
+      state.hasLoadRoute = status
+    },
+    setHasLoadRoute(state, status) {
       state.hasGetInfo = status
     },
     setMessageCount(state, count) {
@@ -107,6 +111,7 @@ export default {
         // 如果你的退出登录无需请求接口，则可以直接使用下面三行代码而无需使用logout调用接口
         commit('setToken', '')
         commit('setAccess', [])
+        commit('setHasGetInfo', false)
         resolve()
       })
     },
@@ -123,6 +128,7 @@ export default {
             commit('setHasGetInfo', true)
             var accessroute = filterAsyncRouter(routes, data.access)
             commit('setAddRoutes', accessroute);
+            // router.addRoutes(state.addRoutes) // 动态添加可访问路由表
             resolve(data)
           }).catch(err => {
             reject(err)

@@ -1,8 +1,5 @@
 package com.wl.web.user.service.impl;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,11 +22,11 @@ public class UserServiceImpl implements UserService {
 
 		if (null != jwtUser) {
 			BeanUtils.copyProperties(jwtUser, user);
-			
-			if (null != jwtUser.getAuthorities()) {
-				List<String> access = jwtUser.getAuthorities().stream().map(authoritiy -> authoritiy.getAuthority()).collect(Collectors.toList());
-				user.setAccess(access);
-			}
+
+//			if (null != jwtUser.getAuthorities()) {
+//				List<String> access = jwtUser.getAuthorities().stream().map(authoritiy -> authoritiy.getAuthority()).collect(Collectors.toList());
+//				user.setAccess(access);
+//			}
 		}
 
 		return user;
